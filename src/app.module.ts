@@ -1,6 +1,9 @@
+import { CategoriesModule } from './categories/categories.module';
+import { ProductsModule } from './products/products.module';
 import { Module } from '@nestjs/common';
 import { UsersModule } from './users/users.module';
 import { FilesModule } from './files/files.module';
+import { ProductsFilesModule } from './productsFiles/productsFiles.module';
 import { AuthModule } from './auth/auth.module';
 import databaseConfig from './config/database.config';
 import authConfig from './config/auth.config';
@@ -27,9 +30,12 @@ import { MailConfigService } from './mail/mail-config.service';
 import { ForgotModule } from './forgot/forgot.module';
 import { MailModule } from './mail/mail.module';
 import { HomeModule } from './home/home.module';
+import { CartsModule } from './carts/carts.module';
 
 @Module({
   imports: [
+    CategoriesModule,
+    ProductsModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [
@@ -56,7 +62,7 @@ import { HomeModule } from './home/home.module';
         fallbackLanguage: configService.get('app.fallbackLanguage'),
         parserOptions: {
           path: path.join(
-            configService.get('app.workingDirectory'),
+            // configService.get('app.workingDirectory'),
             'src',
             'i18n',
             'translations',
@@ -69,6 +75,8 @@ import { HomeModule } from './home/home.module';
     }),
     UsersModule,
     FilesModule,
+    ProductsFilesModule,
+    ProductsModule,
     AuthModule,
     AuthFacebookModule,
     AuthGoogleModule,
@@ -77,6 +85,7 @@ import { HomeModule } from './home/home.module';
     ForgotModule,
     MailModule,
     HomeModule,
+    CartsModule,
   ],
 })
 export class AppModule {}

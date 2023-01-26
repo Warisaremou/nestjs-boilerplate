@@ -82,7 +82,7 @@ export class AuthService {
         {
           status: HttpStatus.UNPROCESSABLE_ENTITY,
           errors: {
-            password: 'incorrectPassword',
+            password: 'Mot de passe incorrect',
           },
         },
         HttpStatus.UNPROCESSABLE_ENTITY,

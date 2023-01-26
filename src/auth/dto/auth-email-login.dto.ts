@@ -7,7 +7,7 @@ export class AuthEmailLoginDto {
   @ApiProperty({ example: 'test1@example.com' })
   @Transform(({ value }) => value.toLowerCase().trim())
   @Validate(IsExist, ['User'], {
-    message: 'emailNotExists',
+    message: 'Addresse mail introuvable',
   })
   email: string;
 

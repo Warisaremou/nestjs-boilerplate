@@ -1,6 +1,5 @@
 import { PartialType } from '@nestjs/swagger';
 import { CreateUserDto } from './create-user.dto';
-
 import { Transform } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
 import { Role } from '../../roles/entities/role.entity';
@@ -36,6 +35,22 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @ApiProperty({ example: 'Doe' })
   @IsOptional()
   lastName?: string | null;
+
+  @ApiProperty({ example: 'john52' })
+  @IsOptional()
+  username?: string | null;
+
+  @ApiProperty({ example: 'Benin' })
+  @IsOptional()
+  country?: string | null;
+
+  @ApiProperty({ example: 'Cotonou, Akpakpa' })
+  @IsOptional()
+  address?: string | null;
+
+  @ApiProperty({ example: '+229 12345678' })
+  @IsOptional()
+  phone?: number | null;
 
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()

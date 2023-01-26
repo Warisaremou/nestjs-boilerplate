@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   BeforeUpdate,
+  OneToMany,
 } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
 import { Status } from '../../statuses/entities/status.entity';
@@ -17,6 +18,7 @@ import { FileEntity } from '../../files/entities/file.entity';
 import * as bcrypt from 'bcryptjs';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { AuthProvidersEnum } from 'src/auth/auth-providers.enum';
+import { Products } from './../../products/entities/product.entity';
 
 @Entity()
 export class User extends EntityHelper {
@@ -60,6 +62,18 @@ export class User extends EntityHelper {
   @Column({ nullable: true })
   lastName: string | null;
 
+  @Column({ nullable: true })
+  username: string | null;
+
+  @Column({ nullable: true })
+  country: string | null;
+
+  @Column({ nullable: true })
+  address: string | null;
+
+  @Column({ nullable: true })
+  phone: number;
+
   @ManyToOne(() => FileEntity, {
     eager: true,
   })
@@ -75,9 +89,19 @@ export class User extends EntityHelper {
   })
   status?: Status;
 
+  /*products for sale */
+  @OneToMany(() => Products, (product) => product.seller)
+  productsForSale?: Products[];
+
+  /*purchased products */
+  @OneToMany(() => Products, (product) => product.buyer)
+  purchasedProducts?: Products[];
+
   @Column({ nullable: true })
   @Index()
   hash: string | null;
+
+  /*User last connexion */
 
   @CreateDateColumn()
   createdAt: Date;

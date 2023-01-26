@@ -24,7 +24,7 @@ export class CreateUserDto {
   email: string | null;
 
   @ApiProperty()
-  @MinLength(6)
+  @MinLength(8)
   password?: string;
 
   provider?: string;
@@ -38,6 +38,22 @@ export class CreateUserDto {
   @ApiProperty({ example: 'Doe' })
   @IsNotEmpty()
   lastName: string | null;
+
+  @ApiProperty({ example: 'john52' })
+  @IsNotEmpty()
+  username?: string | null;
+
+  @ApiProperty({ example: 'Benin' })
+  @IsNotEmpty()
+  country?: string | null;
+
+  @ApiProperty({ example: 'Cotonou, Akpakpa' })
+  @IsOptional()
+  address?: string | null;
+
+  @ApiProperty({ example: '+229 12345678' })
+  @IsNotEmpty()
+  phone?: number | null;
 
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()
