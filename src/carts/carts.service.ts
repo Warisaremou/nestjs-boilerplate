@@ -1,12 +1,10 @@
 import { Injectable } from '@nestjs/common';
-// import { CreateCartDto } from './dto/create-cart.dto';
-// import { UpdateCartDto } from './dto/update-cart.dto';
+import { CreateCartDto } from './dto/create-cart.dto';
+import { UpdateCartDto } from './dto/update-cart.dto';
 
 @Injectable()
 export class CartsService {
-  create(
-    // createCartDto: CreateCartDto
-  ) {
+  create(createCartDto: CreateCartDto) {
     return 'This action adds a new cart';
   }
 
@@ -18,9 +16,7 @@ export class CartsService {
     return `This action returns a #${id} cart`;
   }
 
-  update(id: number
-    // , updateCartDto: UpdateCartDto
-  ) {
+  update(id: number, updateCartDto: UpdateCartDto) {
     return `This action updates a #${id} cart`;
   }
 

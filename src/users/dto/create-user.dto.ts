@@ -41,19 +41,19 @@ export class CreateUserDto {
 
   @ApiProperty({ example: 'john52' })
   @IsNotEmpty()
-  username?: string | null;
+  username?: string;
 
   @ApiProperty({ example: 'Benin' })
   @IsNotEmpty()
-  country?: string | null;
+  country?: string;
 
   @ApiProperty({ example: 'Cotonou, Akpakpa' })
   @IsOptional()
-  address?: string | null;
+  address?: string;
 
   @ApiProperty({ example: '+229 12345678' })
-  @IsNotEmpty()
-  phone?: number | null;
+  @IsOptional()
+  phone?: number;
 
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()

@@ -47,12 +47,14 @@ export class Products extends EntityHelper {
   pictures?: ProductsFilesEntity[];
 
   /*user (seller) */
-  @ManyToOne(() => User, { nullable: false })
+  @ManyToOne(() => User, (seller) => seller.productsForSale, {
+    nullable: false,
+  })
   @JoinColumn({ name: 'seller_id' })
   seller: User;
 
   /*user (buyer) */
-  @ManyToOne(() => User, { nullable: true })
+  @ManyToOne(() => User, (buyer) => buyer.purchasedProducts, { nullable: true })
   @JoinColumn({ name: 'buyer_id' })
   buyer: User;
 

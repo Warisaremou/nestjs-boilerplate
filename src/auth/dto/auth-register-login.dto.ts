@@ -23,4 +23,12 @@ export class AuthRegisterLoginDto {
   @ApiProperty({ example: 'Doe' })
   @IsNotEmpty()
   lastName: string;
+
+  @ApiProperty({ example: 'john52' })
+  @IsNotEmpty()
+  username?: string;
+
+  @ApiProperty({ example: 'Benin' })
+  @IsNotEmpty()
+  country?: string;
 }

@@ -91,11 +91,11 @@ export class User extends EntityHelper {
 
   /*products for sale */
   @OneToMany(() => Products, (product) => product.seller)
-  productsForSale?: Products[];
+  productsForSale: Products[];
 
   /*purchased products */
   @OneToMany(() => Products, (product) => product.buyer)
-  purchasedProducts?: Products[];
+  purchasedProducts: Products[];
 
   @Column({ nullable: true })
   @Index()
