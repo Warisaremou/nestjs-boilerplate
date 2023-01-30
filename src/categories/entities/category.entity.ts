@@ -33,12 +33,6 @@ export class Categories extends EntityHelper {
   @JoinColumn({ name: 'parent_id' })
   parent: Categories;
 
-  // @Column({nullable: true})
-  // parentCategory: string;
-
-  // @OneToMany(() => Categories, (category) => category.parent)
-  // parentCategory: Categories[];
-
   @OneToMany(
     () => ProductToCategory,
     (productToCategory) => productToCategory.product,

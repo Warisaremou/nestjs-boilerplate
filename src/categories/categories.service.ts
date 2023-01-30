@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, getManager } from 'typeorm';
 import { Categories } from './entities/category.entity';
 import { CreateCategoryDto } from './dto/create-category.dto';
 import { UpdateCategoryDto } from './dto/update-category.dto';
@@ -16,15 +16,29 @@ export class CategoriesService {
     const createCategory = this.categoriesRepository.create({
       ...createCategoryDto,
     });
+
     return this.categoriesRepository.save(createCategory);
   }
 
-  findAll() {
-    return this.categoriesRepository.find();
+  async findAll() {
+    // const existingCategories = await this.categoriesRepository.find();
+
+    const categoriesTree = await getManager()
+      .getTreeRepository(Categories)
+      .findTrees();
+
+    return categoriesTree;
   }
 
-  findOne(id: number) {
-    return this.categoriesRepository.findOne(id);
+  async findOne(id: number) {
+    // Check if category exist
+    const existingCategory = await this.categoriesRepository.findOne(id);
+
+    const categoryTree = await getManager()
+      .getTreeRepository(Categories)
+      .findDescendantsTree(existingCategory);
+
+    return categoryTree;
   }
 
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
