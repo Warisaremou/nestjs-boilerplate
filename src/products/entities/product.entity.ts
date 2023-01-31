@@ -60,9 +60,11 @@ export class Products extends EntityHelper {
 
   @ManyToOne(() => ProductStatus, { nullable: false })
   // @JoinColumn({ name: 'product_status' })
-  status?: ProductStatus;
+  status: ProductStatus;
 
-  @OneToMany(() => ProductsReviews, (review) => review.product)
+  @OneToMany(() => ProductsReviews, (review) => review.product, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'rewiews_id' })
   reviews?: ProductsReviews[];
 

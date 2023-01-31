@@ -22,14 +22,16 @@ export class ProductsService {
 
   async findAll() {
     const productRepository = getRepository(Products);
-    const products = await productRepository.find({ relations: ['seller'] });
+    const products = await productRepository.find({
+      relations: ['seller', 'status', 'reviews'],
+    });
     return products;
   }
 
   async findOne(id: number) {
     const productRepository = getRepository(Products);
     const product = await productRepository.findOne(id, {
-      relations: ['seller'],
+      relations: ['seller', 'status', 'reviews'],
     });
     return product;
   }
