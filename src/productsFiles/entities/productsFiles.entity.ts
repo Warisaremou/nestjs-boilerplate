@@ -25,7 +25,7 @@ export class ProductsFilesEntity extends EntityHelper {
   @AfterLoad()
   @AfterInsert()
   updatePath() {
-    if (this.path.indexOf('/products_files') === 0) {
+    if (this.path.indexOf('/') === 0) {
       this.path = appConfig().backendDomain + this.path;
     }
   }

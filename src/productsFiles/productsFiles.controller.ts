@@ -36,13 +36,8 @@ export class ProductsFilesController {
       },
     },
   })
-  @UseInterceptors(
-    FileInterceptor('photo', {
-      dest: './products_images',
-    }),
-  )
-  uploadFile(@UploadedFile() file: Express.Multer.File) {
-    // console.log('file', file);
+  @UseInterceptors(FileInterceptor('product_img'))
+  async uploadFile(@UploadedFile() file) {
     return this.prodctsFilesService.uploadFile(file);
   }
 
