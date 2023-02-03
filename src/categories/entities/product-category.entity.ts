@@ -18,11 +18,15 @@ export class ProductToCategory extends EntityHelper {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Products)
+  @ManyToOne(() => Products, {
+    eager: true,
+  })
   @JoinColumn()
   product: Products;
 
-  @ManyToOne(() => Categories)
+  @ManyToOne(() => Categories, {
+    eager: true,
+  })
   @JoinColumn()
   category: Categories;
 

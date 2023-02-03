@@ -12,7 +12,7 @@ import { IsExist } from './../../utils/validators/is-exists.validator';
 import { Categories } from './../../categories/entities/category.entity';
 import { User } from 'src/users/entities/user.entity';
 
-export class AddProductDto {
+export class    AddProductDto {
   @ApiProperty({ example: 'T-Shirt' })
   @IsString()
   @IsNotEmpty()

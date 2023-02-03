@@ -19,6 +19,9 @@ import * as bcrypt from 'bcryptjs';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { AuthProvidersEnum } from 'src/auth/auth-providers.enum';
 import { Products } from './../../products/entities/product.entity';
+import { Follow } from 'src/follow/entites/follow.entity';
+import { ProductsReviews } from 'src/reviews/entities/reviews.entity';
+import { Carts } from 'src/carts/entities/carts.entity';
 
 @Entity()
 export class User extends EntityHelper {
@@ -89,19 +92,43 @@ export class User extends EntityHelper {
   })
   status?: Status;
 
-  /*products for sale */
-  @OneToMany(() => Products, (product) => product.seller)
+  // followers
+  @OneToMany(() => Follow, (follow) => follow.follower, {
+    eager: true,
+  })
+  followers: Follow[];
+
+  // following
+  @OneToMany(() => Follow, (follow) => follow.following, {
+    eager: true,
+  })
+  followings: Follow[];
+
+  //products for sale
+  @OneToMany(() => Products, (product) => product.seller, {
+    eager: true,
+  })
   productsForSale: Products[];
 
-  /*purchased products */
+  //purchased products
   @OneToMany(() => Products, (product) => product.buyer)
   purchasedProducts: Products[];
+
+  // user rewiews
+  @OneToMany(() => ProductsReviews, (rewiew) => rewiew.user, {
+    eager: true,
+  })
+  reviews: ProductsReviews[];
+
+  // user carts
+  @OneToMany(() => Carts, (cart) => cart.user)
+  carts: Carts[];
 
   @Column({ nullable: true })
   @Index()
   hash: string | null;
 
-  /*User last connexion */
+  // user last connexion
 
   @CreateDateColumn()
   createdAt: Date;

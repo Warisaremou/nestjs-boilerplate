@@ -68,6 +68,10 @@ export class Products extends EntityHelper {
   @JoinColumn({ name: 'rewiews_id' })
   reviews?: ProductsReviews[];
 
+  // product quantity in a cart
+  
+  
+
   @CreateDateColumn()
   createdAt: Date;
 

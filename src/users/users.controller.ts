@@ -22,6 +22,7 @@ import { RoleEnum } from 'src/roles/roles.enum';
 import { AuthGuard } from '@nestjs/passport';
 import { RolesGuard } from 'src/roles/roles.guard';
 import { infinityPagination } from 'src/utils/infinity-pagination';
+import { FollowDto } from './dto/create-follow.dto';
 
 @ApiBearerAuth()
 @Roles(RoleEnum.admin)
@@ -74,5 +75,25 @@ export class UsersController {
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.usersService.softDelete(id);
+  }
+
+  // @Post(':followingId/follow/')
+  // @HttpCode(HttpStatus.CREATED)
+  // follow(@Param('followingId') followingId: number) {
+  //   return this.usersService.follow(followingId);
+  // }
+  @Post('/follow')
+  @HttpCode(HttpStatus.CREATED)
+  follow(@Body() followDto: FollowDto) {
+    return this.usersService.follow(followDto);
+  }
+
+  @Delete(':followerId/follow/:followingId')
+  @HttpCode(HttpStatus.OK)
+  unfollow(
+    @Param('followerId') followerId: number,
+    @Param('followingId') followingId: number,
+  ) {
+    return this.usersService.unfollow(followerId, followingId);
   }
 }
