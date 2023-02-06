@@ -121,7 +121,7 @@ export class User extends EntityHelper {
   reviews: ProductsReviews[];
 
   // user carts
-  @OneToMany(() => Carts, (cart) => cart.user)
+  @OneToMany(() => Carts, (cart) => cart.user, {eager: true})
   carts: Carts[];
 
   @Column({ nullable: true })

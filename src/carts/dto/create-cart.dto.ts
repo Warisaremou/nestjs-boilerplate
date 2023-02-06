@@ -17,7 +17,7 @@ export class CreateCartDto {
   @Validate(IsExist, ['Products', 'id'], {
     message: 'product not exist',
   })
-  products: Products;
+  product: Products;
 
   @ApiProperty({ example: '5' })
   @IsNotEmpty()

@@ -48,6 +48,6 @@ export class ProductsController {
 
   @Delete(':id')
   delete(@Param('id') id: number) {
-    return this.productsServices.delete(id);
+    return this.productsServices.softDelete(id);
   }
 }

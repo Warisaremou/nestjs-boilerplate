@@ -27,7 +27,7 @@ export class ReviewsService {
     return reviews;
   }
 
-  delete(id: number) {
-    return this.reviewsRepository.delete(id);
+  async softDelete(id: number) {
+    return this.reviewsRepository.softDelete(id);
   }
 }

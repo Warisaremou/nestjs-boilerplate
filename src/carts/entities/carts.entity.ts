@@ -4,8 +4,6 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -23,9 +21,9 @@ export class Carts {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToMany(() => Products)
-  @JoinTable()
-  products: Products[];
+  @ManyToOne(() => Products, { nullable: false })
+  @JoinColumn({ name: 'product_id' })
+  product: Products;
 
   @Column({ nullable: false })
   @IsNumber()

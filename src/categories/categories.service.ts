@@ -21,8 +21,6 @@ export class CategoriesService {
   }
 
   async findAll() {
-    // const existingCategories = await this.categoriesRepository.find();
-
     const categoriesTree = await getManager()
       .getTreeRepository(Categories)
       .findTrees();
@@ -49,7 +47,7 @@ export class CategoriesService {
     return this.categoriesRepository.save(updateCategory);
   }
 
-  delete(id: number) {
-    return this.categoriesRepository.delete(id);
+  async softDelete(id: number) {
+    await this.categoriesRepository.softDelete(id);
   }
 }

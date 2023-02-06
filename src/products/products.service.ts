@@ -45,7 +45,7 @@ export class ProductsService {
     return this.productsRepository.save(updateProduct);
   }
 
-  delete(id: number) {
-    return this.productsRepository.delete(id);
+  async softDelete(id: number) {
+    await this.productsRepository.softDelete(id);
   }
 }
