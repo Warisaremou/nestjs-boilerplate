@@ -27,7 +27,7 @@ export class ProductsReviews extends EntityHelper {
   @JoinColumn({ name: 'product_id' })
   product: Products;
 
-  @ManyToOne(() => User, (user) => user.reviews)
+  @ManyToOne(() => User, (user) => user.reviews, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User;
 

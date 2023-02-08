@@ -27,6 +27,14 @@ export class ReviewsService {
     return reviews;
   }
 
+  async findOne(id: number) {
+    const reviewRepository = getRepository(ProductsReviews);
+    const review = await reviewRepository.findOne(id, {
+      relations: ['product', 'user'],
+    });
+    return review;
+  }
+
   async softDelete(id: number) {
     return this.reviewsRepository.softDelete(id);
   }

@@ -13,6 +13,13 @@ export class CartsService {
     private cartsRepository: Repository<Carts>,
   ) {}
 
+  // Function to update product quantity after adding to cart
+  async updateProductQuantity(id: number, quantity: number) {
+    const product: Products = await Products.findOne(id);
+    const newQuantity = product.quantity - quantity;
+    return await Products.update(id, { quantity: newQuantity });
+  }
+
   async create(createCartDto: CreateCartDto) {
     const createCart = this.cartsRepository.create({
       ...createCartDto,
@@ -25,6 +32,11 @@ export class CartsService {
     if (createCartDto.quantity > productQuantity.quantity) {
       return 'Quantity is not available';
     }
+    // Calling function to update product quantity after adding to cart
+    await this.updateProductQuantity(
+      productQuantity.id,
+      createCartDto.quantity,
+    );
 
     return this.cartsRepository.save(createCart);
   }

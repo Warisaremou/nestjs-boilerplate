@@ -5,6 +5,7 @@ import {
   IsString,
   Validate,
   IsOptional,
+  Min,
 } from 'class-validator';
 import { ProductsFilesEntity } from './../../productsFiles/entities/productsFiles.entity';
 import { ProductStatus } from '../../statuses/entities/productStatus.entity';
@@ -12,7 +13,7 @@ import { IsExist } from './../../utils/validators/is-exists.validator';
 import { Categories } from './../../categories/entities/category.entity';
 import { User } from 'src/users/entities/user.entity';
 
-export class    AddProductDto {
+export class AddProductDto {
   @ApiProperty({ example: 'T-Shirt' })
   @IsString()
   @IsNotEmpty()
@@ -30,6 +31,7 @@ export class    AddProductDto {
   @ApiProperty({ example: 'T-Shirt Quantity' })
   @IsNumber()
   @IsNotEmpty()
+  @Min(1)
   quantity: number;
 
   @ApiProperty({ example: 'T-Shirt Mark' })

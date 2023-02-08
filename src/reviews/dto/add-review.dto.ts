@@ -17,11 +17,11 @@ export class AddReviewDto {
   @Validate(IsExist, ['Products', 'id'], {
     message: 'product not exist',
   })
-  product?: Products;
+  product: Products;
 
   @ApiProperty({ type: User })
   @Validate(IsExist, ['User', 'id'], {
     message: 'user not found',
   })
-  user?: User;
+  user: User;
 }
