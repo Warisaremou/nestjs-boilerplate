@@ -15,8 +15,6 @@ import { AddReviewDto } from './dto/add-review.dto';
 import { ReviewsService } from './reviews.service';
 import { AuthGuard } from '@nestjs/passport';
 
-// @ApiBearerAuth()
-// @UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
 @Controller({
   path: 'review',
@@ -29,8 +27,8 @@ export class ReviewsController {
   @UseGuards(AuthGuard('jwt'))
   @HttpCode(HttpStatus.CREATED)
   create(@Body() addRewiew: AddReviewDto, @Req() req) {
-    addRewiew.user = req.user.id;
-    return this.rewiewsServices.create(addRewiew);
+    const userId: number = req.user.id;
+    return this.rewiewsServices.create(userId, addRewiew);
   }
 
   @Get()

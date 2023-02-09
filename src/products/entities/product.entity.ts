@@ -69,8 +69,6 @@ export class Products extends EntityHelper {
   reviews?: ProductsReviews[];
 
   // product quantity in a cart
-  
-  
 
   @CreateDateColumn()
   createdAt: Date;

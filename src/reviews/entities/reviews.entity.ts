@@ -29,7 +29,7 @@ export class ProductsReviews extends EntityHelper {
 
   @ManyToOne(() => User, (user) => user.reviews, { nullable: false })
   @JoinColumn({ name: 'user_id' })
-  user: User;
+  user: number;
 
   @CreateDateColumn()
   createdAt: Date;

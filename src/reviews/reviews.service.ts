@@ -11,10 +11,12 @@ export class ReviewsService {
     private reviewsRepository: Repository<ProductsReviews>,
   ) {}
 
-  create(addReview: AddReviewDto) {
+  create(id: number, addReview: AddReviewDto) {
     const createReview = this.reviewsRepository.create({
       ...addReview,
     });
+
+    createReview.user = id;
 
     return this.reviewsRepository.save(createReview);
   }
