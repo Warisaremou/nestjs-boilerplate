@@ -34,6 +34,7 @@ import { MailModule } from './mail/mail.module';
 import { HomeModule } from './home/home.module';
 import { CartsModule } from './carts/carts.module';
 import { OrdersModule } from './orders/orders.module';
+import { PaymentsModule } from './payments/payments.module';
 
 @Module({
   imports: [
@@ -92,6 +93,7 @@ import { OrdersModule } from './orders/orders.module';
     HomeModule,
     CartsModule,
     OrdersModule,
+    PaymentsModule,
   ],
 })
 export class AppModule {}

@@ -22,6 +22,7 @@ import { Products } from './../../products/entities/product.entity';
 import { Follow } from 'src/follow/entites/follow.entity';
 import { ProductsReviews } from 'src/reviews/entities/reviews.entity';
 import { Carts } from 'src/carts/entities/carts.entity';
+import { Orders } from './../../orders/entities/order.entity';
 
 @Entity()
 export class User extends EntityHelper {
@@ -123,6 +124,10 @@ export class User extends EntityHelper {
   // user carts
   @OneToMany(() => Carts, (cart) => cart.user, {eager: true})
   carts: Carts[];
+
+  // user orders
+  @OneToMany(() => Orders, (order) => order.user, { eager: true })
+  orders: Orders[];
 
   @Column({ nullable: true })
   @Index()
