@@ -47,7 +47,7 @@ export class UsersService {
   }
 
   async softDelete(id: number): Promise<void> {
-    await this.usersRepository.softDelete(id);
+    await this.usersRepository.delete(id);
   }
 
   async follow(followDto: FollowDto) {

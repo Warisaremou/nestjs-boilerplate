@@ -27,12 +27,7 @@ export class MailConfigService implements MailerOptionsFactory {
         )}" <${this.configService.get('mail.defaultEmail')}>`,
       },
       template: {
-        dir: path.join(
-          this.configService.get('app.workingDirectory'),
-          'src',
-          'mail',
-          'mail-templates',
-        ),
+        dir: path.join(process.cwd(), 'src', 'mail', 'mail-templates'),
         adapter: new HandlebarsAdapter(),
         options: {
           strict: true,

@@ -1,6 +1,6 @@
 import { Factory, Seeder } from 'typeorm-seeding';
 import { Connection } from 'typeorm';
-import { OrderStatus } from '../../statuses/entities/orderStatus.entity';
+import { OrderStatus } from 'src/statuses/entities/orderStatus.entity';
 import { OrderStatusEnum } from 'src/statuses/orderStatus.enum';
 
 export default class CreateStatus implements Seeder {
