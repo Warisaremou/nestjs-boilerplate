@@ -78,6 +78,9 @@ export class User extends EntityHelper {
   @Column({ nullable: true })
   phone: number;
 
+  @Column({ nullable: true })
+  description: string;
+
   @ManyToOne(() => FileEntity, {
     eager: true,
   })
@@ -122,7 +125,7 @@ export class User extends EntityHelper {
   reviews: ProductsReviews[];
 
   // user carts
-  @OneToMany(() => Carts, (cart) => cart.user, {eager: true})
+  @OneToMany(() => Carts, (cart) => cart.user, { eager: true })
   carts: Carts[];
 
   // user orders

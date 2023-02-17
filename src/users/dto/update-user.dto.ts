@@ -52,6 +52,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   phone?: number | null;
 
+  @ApiProperty({ example: 'Disponible pour tous vos accessoires iPhone.' })
+  @IsOptional()
+  description?: string;
+
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()
   @Validate(IsExist, ['FileEntity', 'id'], {

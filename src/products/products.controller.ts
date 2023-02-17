@@ -8,12 +8,15 @@ import {
   Param,
   Patch,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { ProductsService } from './products.service';
 import { AddProductDto } from './dto/add-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { AuthGuard } from '@nestjs/passport';
 
+// @UseGuards(AuthGuard('jwt'))
 @ApiTags('Products')
 @Controller({
   path: 'products',
@@ -22,6 +25,7 @@ import { UpdateProductDto } from './dto/update-product.dto';
 export class ProductsController {
   constructor(private productsServices: ProductsService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() addProduct: AddProductDto) {
@@ -40,12 +44,14 @@ export class ProductsController {
     return this.productsServices.findOne(id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   update(@Param('id') id: number, @Body() updateProductDto: UpdateProductDto) {
     return this.productsServices.update(id, updateProductDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.productsServices.softDelete(id);

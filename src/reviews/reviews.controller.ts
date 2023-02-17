@@ -15,6 +15,7 @@ import { AddReviewDto } from './dto/add-review.dto';
 import { ReviewsService } from './reviews.service';
 import { AuthGuard } from '@nestjs/passport';
 
+// @UseGuards(AuthGuard('jwt'))
 @ApiTags('Reviews')
 @Controller({
   path: 'review',
@@ -23,8 +24,8 @@ import { AuthGuard } from '@nestjs/passport';
 export class ReviewsController {
   constructor(private rewiewsServices: ReviewsService) {}
 
-  @Post()
   @UseGuards(AuthGuard('jwt'))
+  @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() addRewiew: AddReviewDto, @Req() req) {
     const userId: number = req.user.id;
@@ -42,7 +43,8 @@ export class ReviewsController {
   findOne(@Param('id') id: number) {
     return this.rewiewsServices.findOne(id);
   }
-
+  
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   delete(@Param('id') id: number) {
     return this.rewiewsServices.softDelete(id);

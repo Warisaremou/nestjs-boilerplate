@@ -32,10 +32,6 @@ export class Orders extends EntityHelper {
   @IsString()
   delivery_adress: string;
 
-  @Column({ nullable: false })
-  @IsString()
-  delivery_method: string;
-
   @ManyToOne(() => User, (user) => user.orders, { nullable: false })
   @JoinColumn({ name: 'user_id' })
   user: User;

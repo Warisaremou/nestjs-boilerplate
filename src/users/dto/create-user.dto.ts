@@ -55,6 +55,10 @@ export class CreateUserDto {
   @IsOptional()
   phone?: number;
 
+  @ApiProperty({ example: 'Disponible pour tous vos accessoires iPhone.' })
+  @IsOptional()
+  description?: string;
+
   @ApiProperty({ type: () => FileEntity })
   @IsOptional()
   @Validate(IsExist, ['FileEntity', 'id'], {
