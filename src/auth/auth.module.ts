@@ -23,6 +23,7 @@ import { MailModule } from 'src/mail/mail.module';
         secret: configService.get('auth.secret'),
         signOptions: {
           expiresIn: configService.get('auth.expires'),
+          // expiresIn: '20s',
         },
       }),
     }),
