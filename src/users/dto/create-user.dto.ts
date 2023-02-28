@@ -51,6 +51,10 @@ export class CreateUserDto {
   @IsOptional()
   address?: string;
 
+  @ApiProperty({ example: 'linked/user.com' })
+  @IsOptional()
+  socialLink?: string;
+
   @ApiProperty({ example: '+229 12345678' })
   @IsOptional()
   phone?: number;

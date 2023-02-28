@@ -39,6 +39,12 @@ export class CategoriesService {
     return categoryTree;
   }
 
+  //FindAll by ids
+  async findAllByIds(ids: number[]) {
+    const categories = await this.categoriesRepository.findByIds(ids);
+    return categories;
+  }
+
   update(id: number, updateCategoryDto: UpdateCategoryDto) {
     const updateCategory = this.categoriesRepository.create({
       id,

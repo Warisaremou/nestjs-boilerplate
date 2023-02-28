@@ -12,7 +12,7 @@ import {
 } from 'typeorm';
 import { EntityHelper } from './../../utils/entity-helper';
 import { User } from 'src/users/entities/user.entity';
-import { IsNumber, IsString } from 'class-validator';
+import { IsBoolean, IsNumber, IsString } from 'class-validator';
 import { OrderStatus } from './../../statuses/entities/orderStatus.entity';
 import { Payments } from 'src/payments/entities/payment.entity';
 
@@ -25,7 +25,15 @@ export class Orders extends EntityHelper {
   @IsNumber()
   total: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
+  @IsBoolean()
+  is_delivered: boolean;
+
+  @Column({ nullable: false })
+  @IsBoolean()
+  is_cancelled: boolean;
+
+  @Column()
   shipping_date: Date;
 
   @Column({ nullable: false })
@@ -45,7 +53,6 @@ export class Orders extends EntityHelper {
 
   @ManyToOne(() => Payments, (payment) => payment.order, {
     eager: true,
-    nullable: false,
   })
   @JoinColumn({ name: 'payment_id' })
   payment: Payments;

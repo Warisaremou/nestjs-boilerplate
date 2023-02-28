@@ -51,6 +51,10 @@ export class UpdateUserDto extends PartialType(CreateUserDto) {
   @IsOptional()
   address?: string | null;
 
+  @ApiProperty({ example: 'linked/user.com' })
+  @IsOptional()
+  socialLink?: string | null;
+
   @ApiProperty({ example: '+229 12345678' })
   @IsOptional()
   phone?: number | null;

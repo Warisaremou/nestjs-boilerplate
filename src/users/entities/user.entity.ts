@@ -76,6 +76,9 @@ export class User extends EntityHelper {
   address: string | null;
 
   @Column({ nullable: true })
+  socialLink: string | null;
+
+  @Column({ nullable: true })
   phone: number;
 
   @Column({ nullable: true })

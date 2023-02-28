@@ -3,7 +3,7 @@ import { Connection } from 'typeorm';
 import { OrderStatus } from 'src/statuses/entities/orderStatus.entity';
 import { OrderStatusEnum } from 'src/statuses/orderStatus.enum';
 
-export default class CreateStatus implements Seeder {
+export default class CreateOrderStatus implements Seeder {
   public async run(factory: Factory, connection: Connection): Promise<void> {
     const count = await connection
       .createQueryBuilder()
@@ -19,10 +19,11 @@ export default class CreateStatus implements Seeder {
         .values([
           {
             id: OrderStatusEnum.attente,
-            name: 'en attente de paiement',
+            name: 'En attente de paiement',
           },
-          { id: OrderStatusEnum.expédiée, name: 'expédiée' },
-          { id: OrderStatusEnum.annulée, name: 'annulée' },
+          { id: OrderStatusEnum.expedier, name: 'Expédier' },
+          { id: OrderStatusEnum.valider, name: 'Valider' },
+          { id: OrderStatusEnum.annuler, name: 'Annuler' },
         ])
         .execute();
     }

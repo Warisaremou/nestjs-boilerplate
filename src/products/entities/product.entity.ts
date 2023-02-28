@@ -4,6 +4,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -15,6 +16,7 @@ import { ProductsFilesEntity } from './../../productsFiles/entities/productsFile
 import { User } from 'src/users/entities/user.entity';
 import { ProductsReviews } from './../../reviews/entities/reviews.entity';
 import { ProductStatus } from 'src/statuses/entities/productStatus.entity';
+import { Categories } from 'src/categories/entities/category.entity';
 
 @Entity()
 export class Products extends EntityHelper {
@@ -33,8 +35,11 @@ export class Products extends EntityHelper {
   @Column({ nullable: false })
   quantity: number;
 
-  @Column({ nullable: false })
+  @Column()
   mark: string;
+
+  @ManyToMany(() => Categories)
+  categories: Categories[];
 
   @OneToMany(
     () => ProductToCategory,

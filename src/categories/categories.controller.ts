@@ -40,6 +40,14 @@ export class CategoriesController {
     return this.categoriesServices.findOne(id);
   }
 
+  // Get by ids
+  @Get(':ids')
+  @HttpCode(HttpStatus.OK)
+  async findAllByIds(@Param('ids') ids: string) {
+    const idArray = ids.split(',').map(Number);
+    return await this.categoriesServices.findAllByIds(idArray);
+  }
+
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   update(

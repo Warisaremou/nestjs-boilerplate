@@ -28,7 +28,7 @@ export class ProductToCategory extends EntityHelper {
     eager: true,
   })
   @JoinColumn()
-  category: Categories;
+  category: Categories[];
 
   @CreateDateColumn()
   createdAt: Date;

@@ -1,5 +1,6 @@
 export enum OrderStatusEnum {
   'attente' = 1,
-  'expédiée' = 2,
-  'annulée' = 3,
+  'expedier' = 2,
+  'valider' = 3,
+  'annuler' = 4,
 }

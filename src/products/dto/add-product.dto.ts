@@ -39,6 +39,7 @@ export class AddProductDto {
   mark: string;
 
   @ApiProperty({ type: User })
+  @IsOptional()
   @Validate(IsExist, ['User', 'id'], {
     message: 'user not exist',
   })

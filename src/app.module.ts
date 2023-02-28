@@ -68,7 +68,7 @@ import { PaymentsModule } from './payments/payments.module';
         fallbackLanguage: configService.get('app.fallbackLanguage'),
         parserOptions: {
           path: path.join(
-            // configService.get('app.workingDirectory'),
+           process.cwd(),
             'src',
             'i18n',
             'translations',
