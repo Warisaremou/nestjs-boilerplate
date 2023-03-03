@@ -18,7 +18,7 @@ export class FilesService {
         {
           status: HttpStatus.UNPROCESSABLE_ENTITY,
           errors: {
-            file: 'selectFile',
+            file: 'Selectionner une image',
           },
         },
         HttpStatus.UNPROCESSABLE_ENTITY,

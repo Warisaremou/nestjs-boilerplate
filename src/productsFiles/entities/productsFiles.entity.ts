@@ -19,14 +19,16 @@ export class ProductsFilesEntity extends EntityHelper {
   id: string;
 
   @Allow()
-  @Column()
-  path: string;
+  @Column({ type: 'json', array: true })
+  path: string[];
 
   @AfterLoad()
   @AfterInsert()
   updatePath() {
-    if (this.path.indexOf('/') === 0) {
-      this.path = appConfig().backendDomain + this.path;
+    for (let i = 0; i < this.path.length; i++) {
+      if (this.path[i].indexOf('/') === 0) {
+        this.path[i] = appConfig().backendDomain + this.path[i];
+      }
     }
   }
 

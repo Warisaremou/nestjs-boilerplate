@@ -12,28 +12,57 @@ export class ProductsFilesService {
     private productsFileRepository: Repository<ProductsFilesEntity>,
   ) {}
 
-  async uploadFile(file): Promise<ProductsFilesEntity> {
-    if (!file) {
+  async uploadFiles(files): Promise<ProductsFilesEntity> {
+    if (!files) {
       throw new HttpException(
         {
           status: HttpStatus.UNPROCESSABLE_ENTITY,
           errors: {
-            file: 'selectFile',
+            file: 'Selectionner les images',
           },
         },
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
 
-    const path = {
-      local: `/${this.configService.get('app.apiPrefix')}/v1/${file.path}`,
-      s3: file.location,
-    };
+    const paths = [];
+    if (Array.isArray(files)) {
+      for (let i = 0; i < files.length; i++) {
+        const path = {
+          local: `/${this.configService.get('app.apiPrefix')}/v1/${
+            files[i].path
+          }`,
+          s3: files[i].location,
+        };
+
+        paths.push(path[this.configService.get('file.driver')]);
+      }
+    }
+    console.log(paths);
 
     return this.productsFileRepository.save(
       this.productsFileRepository.create({
-        path: path[this.configService.get('file.driver')],
+        path: paths,
       }),
     );
+    // const path = {
+    //   local: `/${this.configService.get('app.apiPrefix')}/v1/${files.path}`,
+    //   s3: files.location,
+    // };
+
+    // path reveive each file path
+
+    return
+    // return this.productsFileRepository.save(
+    //   this.productsFileRepository.create({
+    //     path: paths.join(','),
+    //   }),
+    // );
+
+    // return this.productsFileRepository.save(
+    //   this.productsFileRepository.create({
+    //     path: path[this.configService.get('file.driver')],
+    //   }),
+    // );
   }
 }

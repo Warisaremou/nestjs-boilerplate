@@ -28,7 +28,7 @@ export class AuthUpdateDto {
   @IsOptional()
   address?: string | null;
 
-  @ApiProperty({ example: '+229 12345678' })
+  @ApiProperty({ example: '22912345678' })
   @IsOptional()
   phone?: number | null;
 

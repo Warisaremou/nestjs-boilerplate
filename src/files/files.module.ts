@@ -65,7 +65,7 @@ import { FilesService } from './files.service';
                   {
                     status: HttpStatus.UNPROCESSABLE_ENTITY,
                     errors: {
-                      file: `cantUploadFileType`,
+                      file: `Type d'image invalide`,
                     },
                   },
                   HttpStatus.UNPROCESSABLE_ENTITY,

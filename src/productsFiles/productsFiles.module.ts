@@ -20,7 +20,7 @@ import { ProductsFilesService } from './productsFiles.service';
         const storages = {
           local: () =>
             diskStorage({
-              destination: './files/products_files',
+              destination: './products_files',
               filename: (request, file, callback) => {
                 callback(
                   null,
@@ -65,7 +65,7 @@ import { ProductsFilesService } from './productsFiles.service';
                   {
                     status: HttpStatus.UNPROCESSABLE_ENTITY,
                     errors: {
-                      file: `cantUploadFileType`,
+                      file: `Type d'image invalide`,
                     },
                   },
                   HttpStatus.UNPROCESSABLE_ENTITY,

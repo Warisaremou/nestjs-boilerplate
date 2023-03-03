@@ -21,10 +21,41 @@ export default class CreateAdmin implements Seeder {
         .into(User)
         .values([
           plainToClass(User, {
+            email: 'john.doe@example.com',
             firstName: 'John',
             lastName: 'Doe',
-            email: 'john.doe@example.com',
-            password: 'secret',
+            username: 'john.doe51',
+            password: 'john1234',
+            role: {
+              id: RoleEnum.user,
+              name: 'Admin',
+            },
+            status: {
+              id: StatusEnum.active,
+              name: 'Active',
+            },
+          }),
+          plainToClass(User, {
+            email: 'bilalinoussa@gmail.com',
+            firstName: 'Bilal',
+            lastName: 'INOUSSA',
+            username: 'bil-56',
+            password: 'bilal1234',
+            role: {
+              id: RoleEnum.user,
+              name: 'Admin',
+            },
+            status: {
+              id: StatusEnum.active,
+              name: 'Active',
+            },
+          }),
+          plainToClass(User, {
+            email: 'oscarassogba@gmail.com',
+            firstName: 'Oscar',
+            lastName: 'ASSOGBA',
+            username: 'assogba2.5',
+            password: 'oscar1234',
             role: {
               id: RoleEnum.user,
               name: 'Admin',
