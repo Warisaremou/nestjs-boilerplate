@@ -15,7 +15,7 @@ import { ProductsFilesService } from './productsFiles.service';
 
 @ApiTags('Products_Files')
 @Controller({
-  path: 'products_files',
+  path: 'images',
   version: '1',
 })
 export class ProductsFilesController {
@@ -36,13 +36,13 @@ export class ProductsFilesController {
       },
     },
   })
-  @UseInterceptors(FilesInterceptor('files', 4))
+  @UseInterceptors(FilesInterceptor('image', 4))
   async uploadFile(@UploadedFiles() files) {
     return this.prodctsFilesService.uploadFiles(files);
   }
 
   @Get(':path')
   download(@Param('path') path, @Response() response) {
-    return response.sendFile(path, { root: './products_files' });
+    return response.sendFile(path, { root: './images' });
   }
 }

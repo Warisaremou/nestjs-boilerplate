@@ -13,9 +13,7 @@ export class ProductsService {
   ) {}
 
   create(addProductDto: AddProductDto) {
-    const createProduct = this.productsRepository.create({
-      ...addProductDto,
-    });
+    const createProduct = this.productsRepository.create(addProductDto);
 
     return this.productsRepository.save(createProduct);
   }
@@ -23,7 +21,7 @@ export class ProductsService {
   async findAll() {
     const productRepository = getRepository(Products);
     const products = await productRepository.find({
-      relations: ['seller', 'status', 'reviews'],
+      relations: ['pictures', 'seller', 'status', 'reviews'],
     });
     return products;
   }
@@ -31,7 +29,7 @@ export class ProductsService {
   async findOne(id: number) {
     const productRepository = getRepository(Products);
     const product = await productRepository.findOne(id, {
-      relations: ['seller', 'status', 'reviews'],
+      relations: ['pictures','seller', 'status', 'reviews'],
     });
     return product;
   }

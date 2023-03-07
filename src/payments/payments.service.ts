@@ -20,7 +20,7 @@ export class PaymentsService {
     return `This action updates a #${updatePaymentDto.id} payment`;
   }
 
-  remove(id: number) {
+  softDelete(id: number) {
     return `This action removes a #${id} payment`;
   }
 }

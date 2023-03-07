@@ -24,6 +24,7 @@ export class ProductsFilesService {
         HttpStatus.UNPROCESSABLE_ENTITY,
       );
     }
+    console.log(files);
 
     const paths = [];
     if (Array.isArray(files)) {
@@ -38,31 +39,23 @@ export class ProductsFilesService {
         paths.push(path[this.configService.get('file.driver')]);
       }
     }
-    console.log(paths);
+
+    if (paths.length === 0) {
+      throw new HttpException(
+        {
+          status: HttpStatus.UNPROCESSABLE_ENTITY,
+          errors: {
+            file: 'Selectionner les images',
+          },
+        },
+        HttpStatus.UNPROCESSABLE_ENTITY,
+      );
+    }
 
     return this.productsFileRepository.save(
       this.productsFileRepository.create({
         path: paths,
       }),
     );
-    // const path = {
-    //   local: `/${this.configService.get('app.apiPrefix')}/v1/${files.path}`,
-    //   s3: files.location,
-    // };
-
-    // path reveive each file path
-
-    return
-    // return this.productsFileRepository.save(
-    //   this.productsFileRepository.create({
-    //     path: paths.join(','),
-    //   }),
-    // );
-
-    // return this.productsFileRepository.save(
-    //   this.productsFileRepository.create({
-    //     path: path[this.configService.get('file.driver')],
-    //   }),
-    // );
   }
 }

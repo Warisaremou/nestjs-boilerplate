@@ -7,6 +7,7 @@ import {
   ManyToMany,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -47,9 +48,10 @@ export class Products extends EntityHelper {
   )
   productToCategory: ProductToCategory[];
 
-  @OneToMany(() => ProductsFilesEntity, (picture) => picture.product)
-  // @JoinColumn({ name: 'pictures_id' })
-  pictures?: ProductsFilesEntity[];
+  // @OneToMany(() => ProductsFilesEntity, (picture)=>picture.id)
+  @OneToOne(() =>ProductsFilesEntity )
+  @JoinColumn({ name: 'picture_id' })
+  pictures: ProductsFilesEntity;
 
   /*user (seller) */
   @ManyToOne(() => User, (seller) => seller.productsForSale, {

@@ -53,11 +53,11 @@ export class AddProductDto {
   category?: Categories;
 
   @ApiProperty({ type: () => ProductsFilesEntity })
-  @IsOptional()
+  @IsNotEmpty()
   @Validate(IsExist, ['ProductsFilesEntity', 'id'], {
     message: 'picture not exists',
   })
-  pictures: ProductsFilesEntity[];
+  pictures?: ProductsFilesEntity;
 
   @ApiProperty({ type: ProductStatus })
   @Validate(IsExist, ['ProductStatus', 'id'], {

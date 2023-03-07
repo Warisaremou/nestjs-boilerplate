@@ -4,13 +4,13 @@ import {
   PrimaryGeneratedColumn,
   AfterLoad,
   AfterInsert,
-  ManyToOne,
+  // ManyToOne,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
 import { EntityHelper } from 'src/utils/entity-helper';
 import appConfig from '../../config/app.config';
-import { Products } from '../../products/entities/product.entity';
+// import { Products } from '../../products/entities/product.entity';
 
 @Entity({ name: 'products_files' })
 export class ProductsFilesEntity extends EntityHelper {
@@ -19,19 +19,23 @@ export class ProductsFilesEntity extends EntityHelper {
   id: string;
 
   @Allow()
-  @Column({ type: 'json', array: true })
-  path: string[];
+  @ApiProperty({ type: [String] })
+  // @Column()
+  @Column({ type: 'json' })
+  path: string[] | [];
 
   @AfterLoad()
   @AfterInsert()
   updatePath() {
+    const newPath = this.path.slice();
     for (let i = 0; i < this.path.length; i++) {
-      if (this.path[i].indexOf('/') === 0) {
-        this.path[i] = appConfig().backendDomain + this.path[i];
+      if (newPath[i].indexOf('/') === 0) {
+        newPath[i] = appConfig().backendDomain + newPath[i];
       }
     }
+    this.path = newPath;
   }
 
-  @ManyToOne(() => Products, (product) => product.pictures)
-  product: Products;
+  // @ManyToOne(() => Products, (product) => product.pictures)
+  // product: Products;
 }

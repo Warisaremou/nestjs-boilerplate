@@ -20,7 +20,7 @@ import { ProductsFilesService } from './productsFiles.service';
         const storages = {
           local: () =>
             diskStorage({
-              destination: './products_files',
+              destination: './images',
               filename: (request, file, callback) => {
                 callback(
                   null,
