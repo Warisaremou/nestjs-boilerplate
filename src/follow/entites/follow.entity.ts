@@ -19,13 +19,13 @@ export class Follow extends EntityHelper {
     nullable: true,
   })
   @JoinColumn({ name: 'follower_id' })
-  follower: User;
+  followers: User;
 
   @ManyToOne(() => User, (user) => user.followings, {
     nullable: true,
   })
   @JoinColumn({ name: 'following_id' })
-  following: User;
+  followings: User;
 
   @CreateDateColumn()
   createdAt: Date;

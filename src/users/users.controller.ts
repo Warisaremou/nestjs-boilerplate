@@ -24,9 +24,6 @@ import { RolesGuard } from 'src/roles/roles.guard';
 import { infinityPagination } from 'src/utils/infinity-pagination';
 import { FollowDto } from './dto/create-follow.dto';
 
-@ApiBearerAuth()
-@Roles(RoleEnum.admin)
-@UseGuards(AuthGuard('jwt'), RolesGuard)
 @ApiTags('Users')
 @Controller({
   path: 'users',
@@ -35,12 +32,18 @@ import { FollowDto } from './dto/create-follow.dto';
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
+  @ApiBearerAuth()
+  @Roles(RoleEnum.admin)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   create(@Body() createProfileDto: CreateUserDto) {
     return this.usersService.create(createProfileDto);
   }
 
+  @ApiBearerAuth()
+  @Roles(RoleEnum.admin)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Get()
   @HttpCode(HttpStatus.OK)
   async findAll(
@@ -60,18 +63,25 @@ export class UsersController {
     );
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @HttpCode(HttpStatus.OK)
   findOne(@Param('id') id: string) {
     return this.usersService.findOne({ id: +id });
   }
 
+  @ApiBearerAuth()
+  @Roles(RoleEnum.admin)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Patch(':id')
   @HttpCode(HttpStatus.OK)
   update(@Param('id') id: number, @Body() updateProfileDto: UpdateUserDto) {
     return this.usersService.update(id, updateProfileDto);
   }
 
+  @ApiBearerAuth()
+  @Roles(RoleEnum.admin)
+  @UseGuards(AuthGuard('jwt'), RolesGuard)
   @Delete(':id')
   remove(@Param('id') id: number) {
     return this.usersService.softDelete(id);
@@ -82,12 +92,14 @@ export class UsersController {
   // follow(@Param('followingId') followingId: number) {
   //   return this.usersService.follow(followingId);
   // }
+  @UseGuards(AuthGuard('jwt'))
   @Post('/follow')
   @HttpCode(HttpStatus.CREATED)
   follow(@Body() followDto: FollowDto) {
     return this.usersService.follow(followDto);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':followerId/follow/:followingId')
   @HttpCode(HttpStatus.OK)
   unfollow(

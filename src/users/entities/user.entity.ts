@@ -11,6 +11,8 @@ import {
   BeforeInsert,
   BeforeUpdate,
   OneToMany,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
 import { Role } from '../../roles/entities/role.entity';
 import { Status } from '../../statuses/entities/status.entity';
@@ -19,7 +21,7 @@ import * as bcrypt from 'bcryptjs';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { AuthProvidersEnum } from 'src/auth/auth-providers.enum';
 import { Products } from './../../products/entities/product.entity';
-import { Follow } from 'src/follow/entites/follow.entity';
+// import { Follow } from 'src/follow/entites/follow.entity';
 import { ProductsReviews } from 'src/reviews/entities/reviews.entity';
 import { Carts } from 'src/carts/entities/carts.entity';
 import { Orders } from './../../orders/entities/order.entity';
@@ -100,16 +102,30 @@ export class User extends EntityHelper {
   status?: Status;
 
   // followers
-  @OneToMany(() => Follow, (follow) => follow.follower, {
-    eager: true,
+  // @OneToMany(() => Follow, (follow) => follow.followers , {
+  //   eager: true,
+  // })
+  // followers: Follow[];
+  @ManyToMany(() => User, (user) => user.followings)
+  @JoinTable({
+    name: 'follow',
+    joinColumn: { name: 'followerId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'followingId', referencedColumnName: 'id' },
   })
-  followers: Follow[];
+  followers: User[];
 
   // following
-  @OneToMany(() => Follow, (follow) => follow.following, {
-    eager: true,
+  // @OneToMany(() => Follow, (follow) => follow.followings, {
+  //   eager: true,
+  // })
+  // followings: Follow[];
+  @ManyToMany(() => User, (user) => user.followers)
+  @JoinTable({
+    name: 'follow',
+    joinColumn: { name: 'followingId', referencedColumnName: 'id' },
+    inverseJoinColumn: { name: 'followerId', referencedColumnName: 'id' },
   })
-  followings: Follow[];
+  followings: User[];
 
   //products for sale
   @OneToMany(() => Products, (product) => product.seller, {
