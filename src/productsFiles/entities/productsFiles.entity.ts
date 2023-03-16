@@ -10,7 +10,6 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Allow } from 'class-validator';
 import { EntityHelper } from 'src/utils/entity-helper';
 import appConfig from '../../config/app.config';
-// import { Products } from '../../products/entities/product.entity';
 
 @Entity({ name: 'products_files' })
 export class ProductsFilesEntity extends EntityHelper {
@@ -20,7 +19,6 @@ export class ProductsFilesEntity extends EntityHelper {
 
   @Allow()
   @ApiProperty({ type: [String] })
-  // @Column()
   @Column({ type: 'json' })
   path: string[] | [];
 
@@ -35,7 +33,4 @@ export class ProductsFilesEntity extends EntityHelper {
     }
     this.path = newPath;
   }
-
-  // @ManyToOne(() => Products, (product) => product.pictures)
-  // product: Products;
 }

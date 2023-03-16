@@ -6,7 +6,6 @@ import { Repository } from 'typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
-// import { Follow } from './../follow/entites/follow.entity';
 import { FollowDto } from './dto/create-follow.dto';
 
 @Injectable()
@@ -14,9 +13,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepository: Repository<User>,
-  ) // @InjectRepository(Follow)
-  // private followRepository: Repository<Follow>,
-  {}
+  ) {}
 
   create(createProfileDto: CreateUserDto) {
     return this.usersRepository.save(
@@ -65,43 +62,31 @@ export class UsersService {
     await this.usersRepository.save(followerUser);
     await this.usersRepository.save(followingUser);
 
-    // const createFollow = await this.followRepository.create(followDto);
-    // await this.followRepository.save(createFollow);
-
     return followDto;
   }
 
-  async unfollow(followerId: number, followingId: number): Promise<void> {
-    // const follow = await this.followRepository.findOne({
-    //   where: { followerId, followingId },
-    // });
-    const followerUser = await this.usersRepository.findOne(followerId, {
+  async unfollow(followDto: FollowDto): Promise<void> {
+    const { follower, following } = followDto;
+    console.log(follower, following);
+    const followerUser = await this.usersRepository.findOne(follower.id, {
       relations: ['followings'],
     });
-    const followingUser = await this.usersRepository.findOne(followingId, {
+    const followingUser = await this.usersRepository.findOne(following.id, {
       relations: ['followers'],
     });
 
     followerUser.followings = followerUser.followings.filter(
-      (following) => following.id !== followingId,
+      (following) => following.id !== following.id,
     );
     followingUser.followers = followingUser.followers.filter(
-      (follower) => follower.id !== followerId,
+      (follower) => follower.id !== follower.id,
     );
 
     await this.usersRepository.save(followerUser);
     await this.usersRepository.save(followingUser);
-
-    // await this.followRepository.remove(follow);
   }
 
   async getFollowers(userId: number): Promise<User[]> {
-    // const followings = await this.followRepository.find({
-    //   where: { followingId: userId },
-    // });
-    // const followerIds = followings.map((following) => following.followerId);
-    // const followers = await this.usersRepository.findByIds(followerIds);
-    // return followers;
     const user = await this.usersRepository.findOne(userId, {
       relations: ['followers'],
     });
@@ -109,12 +94,6 @@ export class UsersService {
   }
 
   async getFollowings(userId: number): Promise<User[]> {
-    // const followings = await this.followRepository.find({
-    //   where: { followerId: userId },
-    // });
-    // const followingIds = followings.map((following) => following.followingId);
-    // const userFollowings = await this.usersRepository.findByIds(followingIds);
-    // return userFollowings;
     const user = await this.usersRepository.findOne(userId, {
       relations: ['followings'],
     });

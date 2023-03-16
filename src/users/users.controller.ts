@@ -87,11 +87,6 @@ export class UsersController {
     return this.usersService.softDelete(id);
   }
 
-  // @Post(':followingId/follow/')
-  // @HttpCode(HttpStatus.CREATED)
-  // follow(@Param('followingId') followingId: number) {
-  //   return this.usersService.follow(followingId);
-  // }
   @UseGuards(AuthGuard('jwt'))
   @Post('/follow')
   @HttpCode(HttpStatus.CREATED)
@@ -100,12 +95,21 @@ export class UsersController {
   }
 
   @UseGuards(AuthGuard('jwt'))
-  @Delete(':followerId/follow/:followingId')
+  @Delete('/unfollow')
   @HttpCode(HttpStatus.OK)
-  unfollow(
-    @Param('followerId') followerId: number,
-    @Param('followingId') followingId: number,
-  ) {
-    return this.usersService.unfollow(followerId, followingId);
+  unfollow(@Body() followDto: FollowDto) {
+    return this.usersService.unfollow(followDto);
+  }
+
+  @Get('followers/:id')
+  @HttpCode(HttpStatus.OK)
+  async getFollowers(@Param('id') id: number) {
+    return this.usersService.getFollowers(id);
+  }
+
+  @Get('followings/:id')
+  @HttpCode(HttpStatus.OK)
+  async getFollowings(@Param('id') id: number) {
+    return this.usersService.getFollowings(id);
   }
 }

@@ -21,7 +21,6 @@ import * as bcrypt from 'bcryptjs';
 import { EntityHelper } from 'src/utils/entity-helper';
 import { AuthProvidersEnum } from 'src/auth/auth-providers.enum';
 import { Products } from './../../products/entities/product.entity';
-// import { Follow } from 'src/follow/entites/follow.entity';
 import { ProductsReviews } from 'src/reviews/entities/reviews.entity';
 import { Carts } from 'src/carts/entities/carts.entity';
 import { Orders } from './../../orders/entities/order.entity';
@@ -101,27 +100,17 @@ export class User extends EntityHelper {
   })
   status?: Status;
 
-  // followers
-  // @OneToMany(() => Follow, (follow) => follow.followers , {
-  //   eager: true,
-  // })
-  // followers: Follow[];
   @ManyToMany(() => User, (user) => user.followings)
   @JoinTable({
-    name: 'follow',
+    name: 'follows',
     joinColumn: { name: 'followerId', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'followingId', referencedColumnName: 'id' },
   })
   followers: User[];
 
-  // following
-  // @OneToMany(() => Follow, (follow) => follow.followings, {
-  //   eager: true,
-  // })
-  // followings: Follow[];
   @ManyToMany(() => User, (user) => user.followers)
   @JoinTable({
-    name: 'follow',
+    name: 'follows',
     joinColumn: { name: 'followingId', referencedColumnName: 'id' },
     inverseJoinColumn: { name: 'followerId', referencedColumnName: 'id' },
   })

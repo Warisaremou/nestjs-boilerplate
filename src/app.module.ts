@@ -1,5 +1,4 @@
 import { ReviewsModule } from './reviews/reviews.module';
-import { FollowModule } from './follow/follow.module';
 import { CategoriesModule } from './categories/categories.module';
 import { ProductsModule } from './products/products.module';
 import { Module } from '@nestjs/common';
@@ -39,7 +38,6 @@ import { PaymentsModule } from './payments/payments.module';
 @Module({
   imports: [
     ReviewsModule,
-    FollowModule,
     CategoriesModule,
     ProductsModule,
     ConfigModule.forRoot({

@@ -16,7 +16,6 @@ import { AddProductDto } from './dto/add-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { AuthGuard } from '@nestjs/passport';
 
-// @UseGuards(AuthGuard('jwt'))
 @ApiTags('Products')
 @Controller({
   path: 'products',
