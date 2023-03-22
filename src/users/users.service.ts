@@ -29,9 +29,11 @@ export class UsersService {
   }
 
   findOne(fields: EntityCondition<User>) {
-    return this.usersRepository.findOne({
+    const user = this.usersRepository.findOne({
       where: fields,
+      relations: ['followers', 'followings'],
     });
+    return user;
   }
 
   update(id: number, updateProfileDto: UpdateUserDto) {

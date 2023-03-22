@@ -29,7 +29,7 @@ export class ProductsService {
   async findOne(id: number) {
     const productRepository = getRepository(Products);
     const product = await productRepository.findOne(id, {
-      relations: ['pictures','seller', 'status', 'reviews'],
+      relations: ['pictures', 'seller', 'status', 'reviews'],
     });
     return product;
   }
